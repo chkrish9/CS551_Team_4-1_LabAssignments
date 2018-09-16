@@ -1,8 +1,8 @@
 var loginapp = angular.module("loginApp", []);
 
-loginapp.controller("loginCtrl", ["$scope",'$rootScope', function ($scope,$rootScope) {
+loginapp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$rootScope,$q) {
     $scope.init = function () {
-        //$scope.facebook();
+        $scope.facebook("2128387634146175","v2.7");
         $scope.google("1059492544866-qvi5a8tdcpjhki6lpc397s9a475fl9pa.apps.googleusercontent.com");
     }
 
@@ -66,13 +66,14 @@ loginapp.controller("loginCtrl", ["$scope",'$rootScope', function ($scope,$rootS
                 fetchUserDetails().then(function(userDetails){
                     userDetails["token"] = response.authResponse.accessToken;
                     $rootScope.$broadcast('event:social-sign-in-success', userDetails);
+                    localStorage.setItem("user",JSON.stringify(userDetails));
                 });
             }else{
                 FB.login(function(response) {
                     if(response.status === "connected"){
                         fetchUserDetails().then(function(userDetails){
                             userDetails["token"] = response.authResponse.accessToken;
-                            $rootScope.$broadcast('event:social-sign-in-success', userDetails);
+                            localStorage.setItem("user",JSON.stringify(userDetails));
                         });
                     }
                 }, {scope: 'email', auth_type: 'rerequest'});
