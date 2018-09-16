@@ -1,9 +1,10 @@
-var loginapp = angular.module("loginApp", []);
+const loginApp = angular.module("loginApp", []);
 
-loginapp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$rootScope,$q) {
+loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$rootScope,$q) {
     $scope.init = function () {
         $scope.facebook("2128387634146175","v2.7");
         $scope.google("1059492544866-qvi5a8tdcpjhki6lpc397s9a475fl9pa.apps.googleusercontent.com");
+        loadInitialData();
     }
 
     $scope.facebook = function (key, version) {
@@ -109,5 +110,26 @@ loginapp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
             localStorage.setItem("user",JSON.stringify( fetchUserDetails()));
         }
     }
+
+    $scope.register = function(){
+        console.log($scope.user);
+        let users = JSON.parse(localStorage.getItem("users"));
+        users.push($scope.user);
+        localStorage.setItem("users", JSON.stringify(users));
+        location.href="../index.html";
+    }
+
+    function loadInitialData()
+    {
+        let users = [
+            {
+                "name": "Guest",
+                "email": "",
+                "password": "guest",
+            }
+        ]
+        localStorage.setItem("users", JSON.stringify(users));
+    }
+
     $scope.init();
 }]);
