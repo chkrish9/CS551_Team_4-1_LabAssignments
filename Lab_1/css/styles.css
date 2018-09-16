@@ -1,0 +1,11 @@
+.margin-top-10px{
+    margin-top: 10px;
+}
+.facebook,.facebook:hover,.facebook:focus{
+    background-color: #087fe8;
+    color: #fff;
+}
+.google,.google:hover,.google:focus{
+    background-color: #ff5555;
+    color: #fff;
+}
