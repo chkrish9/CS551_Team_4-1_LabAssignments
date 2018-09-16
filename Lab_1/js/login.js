@@ -1,10 +1,11 @@
 const loginApp = angular.module("loginApp", []);
 
-loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$rootScope,$q) {
+loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope, $rootScope, $q) {
     $scope.init = function () {
-        $scope.facebook("2128387634146175","v2.7");
+        $scope.facebook("2128387634146175", "v2.7");
         $scope.google("1059492544866-qvi5a8tdcpjhki6lpc397s9a475fl9pa.apps.googleusercontent.com");
-        loadInitialData();
+        if (localStorage.getItem("pageLoaded") !== "true")
+            loadInitialData();
     }
 
     $scope.facebook = function (key, version) {
@@ -14,7 +15,7 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
 
         fbScript.src = "//connect.facebook.net/en_US/sdk.js";
 
-        fbScript.onload = function() {
+        fbScript.onload = function () {
             FB.init({
                 appId: key,
                 status: true,
@@ -32,7 +33,7 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
         gScript.async = true;
         gScript.src = "//apis.google.com/js/platform.js"
 
-        gScript.onload = function() {
+        gScript.onload = function () {
             var params = {
                 client_id: key,
                 scope: 'email'
@@ -44,13 +45,13 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
         scriptTag.parentNode.insertBefore(gScript, scriptTag);
     }
 
-    $scope.facebookClick = function(){
-        var fetchUserDetails = function(){
+    $scope.facebookClick = function () {
+        var fetchUserDetails = function () {
             var deferred = $q.defer();
-            FB.api('/me?fields=name,email,picture', function(res){
-                if(!res || res.error){
+            FB.api('/me?fields=name,email,picture', function (res) {
+                if (!res || res.error) {
                     deferred.reject('Error occured while fetching user details.');
-                }else{
+                } else {
                     deferred.resolve({
                         name: res.name,
                         email: res.email,
@@ -62,19 +63,19 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
             });
             return deferred.promise;
         }
-        FB.getLoginStatus(function(response) {
-            if(response.status === "connected"){
-                fetchUserDetails().then(function(userDetails){
+        FB.getLoginStatus(function (response) {
+            if (response.status === "connected") {
+                fetchUserDetails().then(function (userDetails) {
                     userDetails["token"] = response.authResponse.accessToken;
                     $rootScope.$broadcast('event:social-sign-in-success', userDetails);
-                    localStorage.setItem("user",JSON.stringify(userDetails));
+                    localStorage.setItem("user", JSON.stringify(userDetails));
                 });
-            }else{
-                FB.login(function(response) {
-                    if(response.status === "connected"){
-                        fetchUserDetails().then(function(userDetails){
+            } else {
+                FB.login(function (response) {
+                    if (response.status === "connected") {
+                        fetchUserDetails().then(function (userDetails) {
                             userDetails["token"] = response.authResponse.accessToken;
-                            localStorage.setItem("user",JSON.stringify(userDetails));
+                            localStorage.setItem("user", JSON.stringify(userDetails));
                         });
                     }
                 }, {scope: 'email', auth_type: 'rerequest'});
@@ -82,8 +83,8 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
         });
     }
 
-    $scope.googleClick = function(){
-        var fetchUserDetails = function(){
+    $scope.googleClick = function () {
+        var fetchUserDetails = function () {
             var currentUser = $scope.gauth.currentUser.get();
             var profile = currentUser.getBasicProfile();
             var idToken = currentUser.getAuthResponse().id_token;
@@ -98,29 +99,38 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
                 imageUrl: profile.getImageUrl()
             }
         }
-        if(typeof($scope.gauth) == "undefined")
+        if (typeof($scope.gauth) == "undefined")
             $scope.gauth = gapi.auth2.getAuthInstance();
-        if(!$scope.gauth.isSignedIn.get()){
-            $scope.gauth.signIn().then(function(googleUser){
-                localStorage.setItem("user",JSON.stringify( fetchUserDetails()));
-            }, function(err){
+        if (!$scope.gauth.isSignedIn.get()) {
+            $scope.gauth.signIn().then(function (googleUser) {
+                localStorage.setItem("user", JSON.stringify(fetchUserDetails()));
+            }, function (err) {
                 console.log(err);
             });
-        }else{
-            localStorage.setItem("user",JSON.stringify( fetchUserDetails()));
+        } else {
+            localStorage.setItem("user", JSON.stringify(fetchUserDetails()));
         }
     }
 
-    $scope.register = function(){
-        console.log($scope.user);
+    $scope.register = function () {
         let users = JSON.parse(localStorage.getItem("users"));
         users.push($scope.user);
         localStorage.setItem("users", JSON.stringify(users));
-        location.href="../index.html";
+        location.href = "../index.html";
     }
 
-    function loadInitialData()
-    {
+    $scope.login = function () {
+        let users = JSON.parse(localStorage.getItem("users"));
+        let user = users.filter(function (el) {
+            return (el.email === $scope.login.email && el.password === $scope.login.password)
+        });
+        if (user.length > 0) {
+            localStorage.setItem("loggedInUser", JSON.stringify(user));
+            location.href = "pages/home.html";
+        }
+    }
+
+    function loadInitialData() {
         let users = [
             {
                 "name": "Guest",
@@ -129,6 +139,7 @@ loginApp.controller("loginCtrl", ["$scope",'$rootScope',"$q", function ($scope,$
             }
         ]
         localStorage.setItem("users", JSON.stringify(users));
+        localStorage.setItem("pageLoaded", "true");
     }
 
     $scope.init();
