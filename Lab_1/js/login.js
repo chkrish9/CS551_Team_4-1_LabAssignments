@@ -67,7 +67,27 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
             if (response.status === "connected") {
                 fetchUserDetails().then(function (userDetails) {
                     userDetails["token"] = response.authResponse.accessToken;
-                    localStorage.setItem("loggedInUser", JSON.stringify(userDetails));
+                    let users = JSON.parse(localStorage.getItem("users"));
+                    let foundUser = users.filter(function (el) {
+                        return (el.email === userDetails.email)
+                    });
+                    if(foundUser.length<=0) {
+                        let user = {
+                            "name": userDetails.name,
+                            "email": userDetails.email,
+                            "password": "",
+                            "img": userDetails.imageUrl,
+                            "reg": "facebook",
+                            "token": userDetails.token
+                        }
+                        localStorage.setItem("loggedInUser", JSON.stringify(user));
+                        let users = JSON.parse(localStorage.getItem("users"));
+                        users.push(user)
+                        localStorage.setItem("users", JSON.stringify(users));
+                    }
+                    else{
+                        localStorage.setItem("loggedInUser", JSON.stringify(foundUser[0]));
+                    }
                     location.href = "pages/home.html";
                 });
             } else {
@@ -75,7 +95,27 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
                     if (response.status === "connected") {
                         fetchUserDetails().then(function (userDetails) {
                             userDetails["token"] = response.authResponse.accessToken;
-                            localStorage.setItem("loggedInUser", JSON.stringify(userDetails));
+                            let users = JSON.parse(localStorage.getItem("users"));
+                            let foundUser = users.filter(function (el) {
+                                return (el.email === userDetails.email)
+                            });
+                            if(foundUser.length<=0) {
+                                let user = {
+                                    "name": userDetails.name,
+                                    "email": userDetails.email,
+                                    "password": "",
+                                    "img": userDetails.imageUrl,
+                                    "reg": "facebook",
+                                    "token": userDetails.token
+                                }
+                                localStorage.setItem("loggedInUser", JSON.stringify(user));
+                                let users = JSON.parse(localStorage.getItem("users"));
+                                users.push(user)
+                                localStorage.setItem("users", JSON.stringify(users));
+                            }
+                            else{
+                                localStorage.setItem("loggedInUser", JSON.stringify(foundUser[0]));
+                            }
                             location.href = "pages/home.html";
                         });
                     }
@@ -104,19 +144,62 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
             $scope.gauth = gapi.auth2.getAuthInstance();
         if (!$scope.gauth.isSignedIn.get()) {
             $scope.gauth.signIn().then(function (googleUser) {
-                localStorage.setItem("loggedInUser", JSON.stringify(fetchUserDetails()));
+                let userDetails = fetchUserDetails();
+                let users = JSON.parse(localStorage.getItem("users"));
+                let foundUser = users.filter(function (el) {
+                    return (el.email === userDetails.email)
+                });
+                if(foundUser.length<=0) {
+                    let user = {
+                        "name": userDetails.name,
+                        "email": userDetails.email,
+                        "password": "",
+                        "img": userDetails.imageUrl,
+                        "reg": "google",
+                        "token": userDetails.token
+                    }
+
+                    localStorage.setItem("loggedInUser", JSON.stringify(user));
+                    users.push(user)
+                    localStorage.setItem("users", JSON.stringify(users));
+                }
+                else{
+                    localStorage.setItem("loggedInUser", JSON.stringify(foundUser[0]));
+                }
                 location.href = "pages/home.html";
             }, function (err) {
                 console.log(err);
             });
         } else {
-            localStorage.setItem("loggedInUser", JSON.stringify(fetchUserDetails()));
+            let userDetails = fetchUserDetails();
+            let users = JSON.parse(localStorage.getItem("users"));
+            let foundUser = users.filter(function (el) {
+                return (el.email === userDetails.email)
+            });
+            if(foundUser.length<=0) {
+                let user = {
+                    "name": userDetails.name,
+                    "email": userDetails.email,
+                    "password": "",
+                    "img": userDetails.imageUrl,
+                    "reg": "google",
+                    "token": userDetails.token
+                }
+
+                localStorage.setItem("loggedInUser", JSON.stringify(user));
+                users.push(user)
+                localStorage.setItem("users", JSON.stringify(users));
+            }
+            else{
+                localStorage.setItem("loggedInUser", JSON.stringify(foundUser[0]));
+            }
             location.href = "pages/home.html";
         }
     }
 
     $scope.register = function () {
         let users = JSON.parse(localStorage.getItem("users"));
+        $scope.user["img"] = "../images/default-user.png";
         users.push($scope.user);
         localStorage.setItem("users", JSON.stringify(users));
         location.href = "../index.html";
@@ -139,6 +222,9 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
                 "name": "Guest",
                 "email": "",
                 "password": "guest",
+                "img": "../images/default-user.png",
+                "reg":"normal",
+                "token":""
             }
         ]
         localStorage.setItem("users", JSON.stringify(users));

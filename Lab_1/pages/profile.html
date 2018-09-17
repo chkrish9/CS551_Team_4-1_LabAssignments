@@ -1,10 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>GKG</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body ng-app="homeApp" ng-controller="homeCtrl">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./home.html">GKG</a>
+        </div>
 
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./home.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Hi, {{displayName}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./profile.html">Details</a></li>
+                        <li><a href="#" ng-click="logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <h1>User Details</h1>
+    <div class="row">
+        <div class="col-sm-4 text-center margin-top-10px">
+            <img src="{{user.img}}" class="img-circle" alt="Profile pic" id="profilePic" width="200" height="200">
+        </div>
+        <div class="col-sm-6 margin-top-10px">
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td class="edit">{{user.name}}</td>
+                    <td class="hidden update"><input type="text" ng-model="user.name" class="form-control"></td>
+                    <td><button type="button" class="btn btn-primary edit" ng-click="edit($event)">Edit</button></td>
+                    <td><button type="button" class="btn btn-primary hidden update" ng-click="updateUser($event)">Update</button></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td class="edit" colspan="2">{{user.email}}</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td class="hidden update"><input type="text" ng-model="user.password" class="form-control"></td>
+                    <td><button type="button" class="btn btn-primary edit" ng-click="edit($event)">Change Password</button></td>
+                    <td><button type="button" class="btn btn-primary hidden update" ng-click="updateUser($event)">Update</button></td>
+                </tr>
+                <tr>
+                    <td>Upload</td>
+                    <td colspan="2"><input type="file" id="fileinput" onchange="angular.element(this).scope().imageUpload(this)"  accept="image/*" /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="../js/home.js"></script>
 </body>
 </html>

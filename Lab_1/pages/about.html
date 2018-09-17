@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">GKG</a>
+            <a class="navbar-brand" href="./home.html">GKG</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,9 +32,9 @@
                 <li><a href="./contact.html">Contact</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Hi, {{user.name}}<span class="caret"></span></a>
+                       aria-expanded="false">Hi, {{displayName}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Details</a></li>
+                        <li><a href="./profile.html">Details</a></li>
                         <li><a href="#" ng-click="logout()">Logout</a></li>
                     </ul>
                 </li>
@@ -45,7 +45,6 @@
 <div class="container">
     <h1>About</h1>
 
-    <h3>Google Knowledge Graph (GKG) :</h3>
     <blockquote>
         <p class="text-justify">&nbsp;&nbsp;&nbsp;&nbsp;The Knowledge Graph is a knowledge base used by Google and its
             services to enhance its search engine's results
@@ -61,6 +60,18 @@
             and
             Google Home searches. The Knowledge Graph has been criticized for providing answers without source
             attribution.
+        </p>
+    </blockquote>
+
+    <blockquote>
+        <p class="text-justify">
+            &nbsp;&nbsp;&nbsp;&nbsp;Information from the Knowledge Graph is presented as a box to the right (top on
+            mobile) of search results.
+            According to Google, this information is retrieved from many sources, including the CIA World Factbook,
+            Wikidata, and Wikipedia. The knowledge base grew quickly in size, having tripled its original size
+            within seven months of being announced to the public, covering 570 million entities and 18 billion facts.
+            In October 2016, Google announced that the Knowledge Graph held over 70 billion facts. There is no
+            official documentation on the technology used for the Knowledge Graph implementation.
         </p>
     </blockquote>
 </div>
