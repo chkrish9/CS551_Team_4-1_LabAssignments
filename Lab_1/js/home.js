@@ -8,5 +8,10 @@ homeApp.controller("homeCtrl", ["$scope", function ($scope) {
             location.href="../index.html";
     }
 
+    $scope.logout = function()
+    {
+        localStorage.removeItem("loggedInUser")
+        location.href = "../index.html";
+    }
     $scope.init();
 }]);
