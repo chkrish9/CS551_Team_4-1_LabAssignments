@@ -67,15 +67,16 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
             if (response.status === "connected") {
                 fetchUserDetails().then(function (userDetails) {
                     userDetails["token"] = response.authResponse.accessToken;
-                    $rootScope.$broadcast('event:social-sign-in-success', userDetails);
-                    localStorage.setItem("user", JSON.stringify(userDetails));
+                    localStorage.setItem("loggedInUser", JSON.stringify(userDetails));
+                    location.href = "pages/home.html";
                 });
             } else {
                 FB.login(function (response) {
                     if (response.status === "connected") {
                         fetchUserDetails().then(function (userDetails) {
                             userDetails["token"] = response.authResponse.accessToken;
-                            localStorage.setItem("user", JSON.stringify(userDetails));
+                            localStorage.setItem("loggedInUser", JSON.stringify(userDetails));
+                            location.href = "pages/home.html";
                         });
                     }
                 }, {scope: 'email', auth_type: 'rerequest'});
@@ -103,12 +104,14 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
             $scope.gauth = gapi.auth2.getAuthInstance();
         if (!$scope.gauth.isSignedIn.get()) {
             $scope.gauth.signIn().then(function (googleUser) {
-                localStorage.setItem("user", JSON.stringify(fetchUserDetails()));
+                localStorage.setItem("loggedInUser", JSON.stringify(fetchUserDetails()));
+                location.href = "pages/home.html";
             }, function (err) {
                 console.log(err);
             });
         } else {
-            localStorage.setItem("user", JSON.stringify(fetchUserDetails()));
+            localStorage.setItem("loggedInUser", JSON.stringify(fetchUserDetails()));
+            location.href = "pages/home.html";
         }
     }
 
@@ -125,7 +128,7 @@ loginApp.controller("loginCtrl", ["$scope", '$rootScope', "$q", function ($scope
             return (el.email === $scope.login.email && el.password === $scope.login.password)
         });
         if (user.length > 0) {
-            localStorage.setItem("loggedInUser", JSON.stringify(user));
+            localStorage.setItem("loggedInUser", JSON.stringify(user[0]));
             location.href = "pages/home.html";
         }
     }
