@@ -13,13 +13,6 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand" href="#">GKG</a>
         </div>
     </div>
@@ -29,28 +22,45 @@
     <form>
         <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Email" ng-model="email">
+            <input type="email" class="form-control" id="email" placeholder="Email" ng-model="login.email">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+            <input type="password" class="form-control" id="password" placeholder="Password" ng-model="login.password">
         </div>
         <div class="checkbox">
             <label>
                 <input type="checkbox"> Remember me
             </label>
         </div>
-        <div class="col-sm-4 col-sm-offset-4 margin-top-10px">
-            <button type="button" class="btn btn-default form-control" ng-click="login()">Login</button>
+        <div class="row">
+            <div class="col-sm-6 margin-top-10px">
+                <button type="button" class="btn btn-success form-control" ng-click="login()">Login</button>
+            </div>
+            <div class="col-sm-6 margin-top-10px">
+                <a href="pages/registration.html" class="btn btn-info form-control">Register</a>
+            </div>
         </div>
-        <button type="button" class="btn btn-default form-control margin-top-10px facebook" ng-click="facebook()"><i class="fab fa-facebook-f"></i> Facebook</button>
-        <button type="button" class="btn btn-default form-control margin-top-10px google" ng-click="google()"><i class="fab fa-google-plus-g"></i> Google</button>
+        <div class="row">
+            <div class="col-xs-12">
+                <hr/>
+            </div>
+        </div>
+        <div class="text-center">
+            <h3 class="margin-top-0">OR</h3>
+        </div>
+        <button type="button" class="btn btn-default form-control margin-top-10px facebook" ng-click="facebookClick()"><i
+                class="fab fa-facebook-f"></i> Facebook
+        </button>
+        <button type="button" class="btn btn-default form-control margin-top-10px google" ng-click="googleClick()"><i
+                class="fab fa-google-plus-g"></i> Google
+        </button>
     </form>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://apis.google.com/js/api.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
