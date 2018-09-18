@@ -60,6 +60,7 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         reader.onload = $scope.readImg(img);
         reader.readAsDataURL(file);
     };
+
     $scope.readImg = function (aImg) {
         return function (e) {
             aImg.src = e.target.result;
@@ -77,6 +78,7 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         angular.element(event.currentTarget).parents("tr").find(".edit").addClass("hidden");
         angular.element(event.currentTarget).parents("tr").find(".update").removeClass("hidden");
     };
+
     $scope.updateUser = function (event) {
         angular.element(event.currentTarget).parents("tr").find(".edit").removeClass("hidden");
         angular.element(event.currentTarget).parents("tr").find(".update").addClass("hidden");
@@ -90,5 +92,6 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         });
         localStorage.setItem("users", JSON.stringify(users));
     };
+
     $scope.init();
 }]);
