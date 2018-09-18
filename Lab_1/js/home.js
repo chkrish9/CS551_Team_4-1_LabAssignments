@@ -2,7 +2,7 @@ const homeApp = angular.module("homeApp", []);
 
 homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
     $scope.result = {};
-    $scope.displayName="";
+    $scope.displayName = "";
     $scope.init = function () {
         if (localStorage.getItem("loggedInUser") !== null) {
             $scope.user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -23,10 +23,27 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
             url: 'https://kgsearch.googleapis.com/v1/entities:search?query=' + $scope.search + '&key=AIzaSyA9CvHV75OZgADhnju2DkS73y_3QS1Gsxo&limit=1&indent=True'
         }).then(function successCallback(response) {
             console.log(response);
-            $scope.result["name"] = response.data.itemListElement[0].result.name;
-            $scope.result["description"] = response.data.itemListElement[0].result.description;
-            $scope.result["url"] = response.data.itemListElement[0].result.url;
-            $scope.result["article"] = response.data.itemListElement[0].result.detailedDescription.articleBody;
+            if (response.data.itemListElement.length > 0) {
+                $scope.result = {
+                    "name": "",
+                    "description": "",
+                    "url": "",
+                    "article": "",
+                    "image": "../images/default-user.png"
+                }
+                angular.element("#result").removeClass("hidden");
+                angular.element("#errorMsg").addClass("hidden");
+                $scope.result["name"] = response.data.itemListElement[0].result.name;
+                $scope.result["description"] = response.data.itemListElement[0].result.description;
+                $scope.result["url"] = response.data.itemListElement[0].result.url;
+                $scope.result["article"] = response.data.itemListElement[0].result.detailedDescription.articleBody;
+                if (response.data.itemListElement[0].result.image !== undefined)
+                    $scope.result["image"] = response.data.itemListElement[0].result.image.contentUrl;
+            }
+            else {
+                angular.element("#errorMsg").removeClass("hidden");
+                angular.element("#result").addClass("hidden");
+            }
         }, function errorCallback(response) {
             console.log(response);
         });
@@ -44,8 +61,7 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
                 aImg.src = e.target.result;
                 let users = JSON.parse(localStorage.getItem("users"));
                 users.forEach(function (el) {
-                    if(el.email == $scope.user.email)
-                    {
+                    if (el.email == $scope.user.email) {
                         el.img = e.target.result;
                     }
                 });
@@ -55,17 +71,16 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         reader.readAsDataURL(file);
     }
 
-    $scope.edit = function(event){
+    $scope.edit = function (event) {
         angular.element(event.currentTarget).parents("tr").find(".edit").addClass("hidden")
         angular.element(event.currentTarget).parents("tr").find(".update").removeClass("hidden")
     }
-    $scope.updateUser = function(event){
+    $scope.updateUser = function (event) {
         angular.element(event.currentTarget).parents("tr").find(".edit").removeClass("hidden");
         angular.element(event.currentTarget).parents("tr").find(".update").addClass("hidden");
         let users = JSON.parse(localStorage.getItem("users"));
         users.forEach(function (el) {
-            if(el.email == $scope.user.email)
-            {
+            if (el.email == $scope.user.email) {
                 el.name = $scope.user.name;
                 el.password = $scope.user.password;
                 el.img = $scope.user.img;

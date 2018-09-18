@@ -25,3 +25,8 @@ hr{
 .margin-top-5em{
     margin-top: 5em;
 }
+
+.maps{
+    width: 100%;
+    height: 400px;
+}
