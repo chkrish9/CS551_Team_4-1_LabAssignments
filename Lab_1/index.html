@@ -23,17 +23,12 @@
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" placeholder="Email" ng-model="login.email">
-			<label id="errorEmail"></label>
+			<label id="errorEmail" class="error hidden"></label>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Password" ng-model="login.password">
-			<label id="errorPwd"></label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Remember me
-            </label>
+			<label id="errorPwd" class="error hidden"></label>
         </div>
         <div class="row">
             <div class="col-sm-6 margin-top-10px">
