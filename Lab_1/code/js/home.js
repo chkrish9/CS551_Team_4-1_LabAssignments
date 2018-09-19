@@ -3,6 +3,9 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
     "use strict";
     $scope.result = {};
     $scope.displayName = "";
+    /*
+    * This method will call on controller load which will check weather the user logged in or not.
+    */
     $scope.init = function () {
         if (localStorage.getItem("loggedInUser") !== null) {
             $scope.user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -13,11 +16,19 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         }
     };
 
+    /*
+    * This method will call when the user clicks on logout.
+    * In this method we are removing the key from local storage.
+    */
     $scope.logout = function () {
         localStorage.removeItem("loggedInUser");
         location.href = "../index.html";
     };
 
+    /*
+    * This method will call when the user clicks on the search button in home page.
+    * This will make a request to google knowledge graph and get the results.
+    */
     $scope.find = function () {
         $http({
             method: "GET",
@@ -50,6 +61,9 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         });
     };
 
+    /*
+    * This method will call when the user tries to upload the profile picture in user details page.
+    */
     $scope.imageUpload = function (files) {
         var file = files.files[0];
 
@@ -61,6 +75,9 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         reader.readAsDataURL(file);
     };
 
+    /*
+    * This will call in image upload method.
+    */
     $scope.readImg = function (aImg) {
         return function (e) {
             aImg.src = e.target.result;
@@ -74,11 +91,17 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         };
     };
 
+    /*
+    * This method will call when the user clicks on edit button in user details page.
+    */
     $scope.edit = function (event) {
         angular.element(event.currentTarget).parents("tr").find(".edit").addClass("hidden");
         angular.element(event.currentTarget).parents("tr").find(".update").removeClass("hidden");
     };
 
+    /*
+    * This method will call when the user clicks on update button in user details page.
+    */
     $scope.updateUser = function (event) {
         angular.element(event.currentTarget).parents("tr").find(".edit").removeClass("hidden");
         angular.element(event.currentTarget).parents("tr").find(".update").addClass("hidden");
@@ -93,5 +116,8 @@ homeApp.controller("homeCtrl", ["$scope", "$http", function ($scope, $http) {
         localStorage.setItem("users", JSON.stringify(users));
     };
 
+    /*
+    * Calling the init method.
+    */
     $scope.init();
 }]);

@@ -4,6 +4,10 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
     "use strict";
     $scope.users = JSON.parse(localStorage.getItem("users"));
     $scope.foundUser = null;
+
+    /*
+    * This method will call on controller load.
+    */
     $scope.init = function () {
         $scope.facebook("2128387634146175", "v2.7");
         $scope.google("1059492544866-qvi5a8tdcpjhki6lpc397s9a475fl9pa.apps.googleusercontent.com");
@@ -12,6 +16,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         }
     };
 
+    /*
+    * This will call from init which will initialize the oAuth script for facebook.
+    */
     $scope.facebook = function (key, version) {
         var fbScript = document.createElement("script");
         var scriptTag = document.getElementsByTagName("script")[0];
@@ -30,7 +37,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         };
         scriptTag.parentNode.insertBefore(fbScript, scriptTag);
     };
-
+    /*
+    * This will call from init which will initialize the oAuth script for google.
+    */
     $scope.google = function (key) {
         var gScript = document.createElement("script");
         var scriptTag = document.getElementsByTagName("script")[0];
@@ -49,6 +58,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         scriptTag.parentNode.insertBefore(gScript, scriptTag);
     };
 
+    /*
+    * This will call when the user clicks on facebook button. which will make a oAuth request to facebook and get the details if user is valid.
+    */
     $scope.facebookClick = function () {
         var fetchUserDetails = function () {
             var deferred = $q.defer();
@@ -124,6 +136,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         });
     };
 
+    /*
+    * This will call when the user clicks on google button. which will make a oAuth request to google and get the details if user is valid.
+    */
     $scope.googleClick = function () {
         var fetchUserDetails = function () {
             var currentUser = $scope.gauth.currentUser.get();
@@ -198,6 +213,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         }
     };
 
+    /*
+    * This will call when the user submit the details in registration page and store thr details in local storage.
+    */
     $scope.register = function () {
         angular.element("#errorMsg").addClass("hidden").text("");
         if ($scope.user === undefined) {
@@ -221,6 +239,10 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         }
     };
 
+    /*
+    * This will call when the user click on login.
+    * In this method we will validate the user credentials which we stored in local storage
+    */
     $scope.login = function () {
         angular.element("#errorEmail").addClass("hidden").text("");
         angular.element("#errorPwd").addClass("hidden").text("");
@@ -245,6 +267,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         }
     };
 
+    /*
+    * This method will load the initial data for the login.
+    */
     $scope.loadInitialData = function () {
         var users = [
             {
@@ -260,5 +285,9 @@ loginApp.controller("loginCtrl", ["$scope", "$q", function ($scope, $q) {
         localStorage.setItem("pageLoaded", "true");
     };
 
+    /*
+    * Calling the init method.
+    * This will call google and facebook method which will initialize the oAuth scripts.
+    */
     $scope.init();
 }]);
