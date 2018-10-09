@@ -12,6 +12,8 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
+    //This method will call when the user clicks on login button
     public void login(View view) {
+
     }
 }
