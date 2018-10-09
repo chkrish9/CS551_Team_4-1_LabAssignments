@@ -16,4 +16,7 @@ public class Login extends AppCompatActivity {
     public void login(View view) {
 
     }
+
+    public void register(View view) {
+    }
 }
