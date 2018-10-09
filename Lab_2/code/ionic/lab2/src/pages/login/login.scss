@@ -1,3 +1,19 @@
-page-login {
-
-}
+.login-content {
+    ion-list{
+        padding-top: 100px;
+    }
+    .list-ios > .item-block:first-child{
+        border-top: 0px;
+    }
+    ion-item {
+        background: none;
+        padding: 0;
+    }
+    ion-icon{
+        margin-right:10px;
+        font-size: 1.5em;
+    }
+    .scroll-content{
+        padding-bottom: 0!important;
+    }
+  }
