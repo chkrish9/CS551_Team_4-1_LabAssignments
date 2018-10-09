@@ -9,12 +9,6 @@
     android:paddingRight="30dp"
     android:paddingTop="16dp"
     tools:context=".Login">
-    <ImageView
-        android:id="@+id/image"
-        android:src="@drawable/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/lblLogin"
@@ -24,8 +18,7 @@
         android:text="Login"
         android:gravity="center_horizontal"
         android:textSize="20sp"
-        android:layout_below="@+id/image"
-        android:textColor="@color/colorBlue"/>
+        android:layout_below="@+id/image"/>
 
     <TextView
         android:id="@+id/lblUsername"
@@ -74,5 +67,13 @@
         android:layout_centerHorizontal="true"
         android:text="Login"
         android:onClick="login"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblPasswordError"
+        android:layout_centerHorizontal="true"
+        android:text="Register"
+        android:onClick="register"/>
 
 </RelativeLayout>
