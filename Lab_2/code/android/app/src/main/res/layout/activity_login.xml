@@ -9,7 +9,12 @@
     android:paddingRight="30dp"
     android:paddingTop="16dp"
     tools:context=".Login">
-
+    <ImageView
+        android:id="@+id/image"
+        android:src="@drawable/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/lblLogin"
@@ -19,6 +24,7 @@
         android:text="Login"
         android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:layout_below="@+id/image"
         android:textColor="@color/colorBlue"/>
 
     <TextView
@@ -40,7 +46,6 @@
         android:layout_below="@+id/txtUsername"
         android:textColor="@color/colorRed"
         android:layout_marginTop="10dp" />
-
     <TextView
         android:id="@+id/lblPassword"
         android:layout_width="match_parent"
