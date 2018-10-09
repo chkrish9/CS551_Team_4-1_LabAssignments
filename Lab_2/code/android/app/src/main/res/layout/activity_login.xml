@@ -46,7 +46,6 @@
         android:layout_below="@+id/txtUsername"
         android:textColor="@color/colorRed"
         android:layout_marginTop="10dp" />
-
     <TextView
         android:id="@+id/lblPassword"
         android:layout_width="match_parent"
