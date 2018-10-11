@@ -17,8 +17,7 @@
         android:layout_marginTop="10dp"
         android:text="Login"
         android:gravity="center_horizontal"
-        android:textSize="20sp"
-        android:layout_below="@+id/image"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/lblUsername"
@@ -26,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/lblLogin"
-        android:text="Username"/>
+        android:text="Email"/>
     <EditText
         android:id="@+id/txtUsername"
         android:layout_width="match_parent"
@@ -61,6 +60,7 @@
         android:layout_marginTop="10dp" />
 
     <Button
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblPasswordError"
@@ -71,7 +71,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lblPasswordError"
+        android:layout_below="@+id/btnLogin"
         android:layout_centerHorizontal="true"
         android:text="Register"
         android:onClick="register"/>
