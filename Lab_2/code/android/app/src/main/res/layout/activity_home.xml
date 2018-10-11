@@ -31,6 +31,7 @@
         android:layout_below="@+id/imgView"/>
 
     <Button
+        android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Logout"
@@ -39,5 +40,19 @@
         android:background="@color/colorRed"
         android:layout_alignParentBottom="true"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/btnLogout"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="78dp"
+        android:background="@color/colorGrey"
+        android:clickable="true"
+        android:onClick="userdetails"
+        android:src="@drawable/account_card_details"
+        app:backgroundTint="@color/colorGrey"
+        tools:ignore="OnClick" />
 
 </RelativeLayout>

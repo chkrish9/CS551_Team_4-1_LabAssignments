@@ -146,4 +146,9 @@ public class Home extends AppCompatActivity {
         Intent redirect = new Intent(Home.this,Login.class);
         startActivity(redirect);
     }
+
+    public void userdetails(View view) {
+        Intent redirect = new Intent(Home.this,UserDetails.class);
+        startActivity(redirect);
+    }
 }
