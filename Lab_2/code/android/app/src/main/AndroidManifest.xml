@@ -19,7 +19,6 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".Home"></activity>
-        <activity android:name=".UserDetails"></activity>
     </application>
 
 </manifest>
