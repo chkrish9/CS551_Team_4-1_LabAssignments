@@ -19,6 +19,20 @@
         android:gravity="center_horizontal"
         android:textSize="20sp"/>
 
+    <Button
+        android:id="@+id/btnResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Result"
+        android:onClick="getResult"
+        android:layout_below="@+id/lblHome"/>
+
+    <TextView
+        android:id="@+id/lblResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnResult"/>
 
 
 </RelativeLayout>
