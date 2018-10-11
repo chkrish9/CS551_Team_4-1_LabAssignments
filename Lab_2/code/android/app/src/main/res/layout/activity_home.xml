@@ -10,29 +10,34 @@
     android:paddingTop="16dp"
     tools:context=".Home">
 
-    <TextView
-        android:id="@+id/lblHome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Home"
-        android:gravity="center_horizontal"
-        android:textSize="20sp"/>
-
     <Button
-        android:id="@+id/btnResult"
+        android:id="@+id/btnCam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Result"
-        android:onClick="getResult"
-        android:layout_below="@+id/lblHome"/>
-
+        android:text="Camera"
+        android:onClick="openCamera" />
+    <ImageView
+        android:id="@+id/imgView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnCam"/>
     <TextView
         android:id="@+id/lblResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imgView"/>
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnResult"/>
+        android:text="Logout"
+        android:onClick="logout"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorRed"
+        android:layout_alignParentBottom="true"/>
 
 
 </RelativeLayout>

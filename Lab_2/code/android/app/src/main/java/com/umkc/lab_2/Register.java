@@ -31,25 +31,44 @@ public class Register extends AppCompatActivity {
         String email = txtEmail.getText().toString();
         TextView txtPassword = (TextView) findViewById(R.id.txtPassword);
         String password = txtPassword.getText().toString();
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent redirect = new Intent(Register.this, Login.class);
-                            startActivity(redirect);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(Register.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
 
-                    }
-                });
+        TextView lblUsernameError = (TextView) findViewById(R.id.lblUsernameError);
+        TextView lblPasswordError = (TextView) findViewById(R.id.lblPasswordError);
+        //Setting empty string to the error labels.
+        lblUsernameError.setText("");
+        lblPasswordError.setText("");
+
+        //Checking the username is empty or not.
+        if(email.isEmpty())
+        {
+            lblUsernameError.setText("Please enter the email.");
+        }
+        //Checking the password is empty or not.
+        else if(password.isEmpty())
+        {
+            lblPasswordError.setText("Please enter password");
+        }
+        //Validating the username and password.
+        else {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Intent redirect = new Intent(Register.this, Login.class);
+                                startActivity(redirect);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                lblPasswordError.setText("Registration unsuccessful.");
+                            }
+
+                        }
+                    });
+        }
 
     }
 }

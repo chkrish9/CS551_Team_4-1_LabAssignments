@@ -31,21 +31,40 @@ public class Login extends AppCompatActivity {
         TextView txtPassword = findViewById(R.id.txtPassword);
         String password = txtPassword.getText().toString();
 
-        mAuth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Intent redirect = new Intent(Login.this,Home.class);
-                        startActivity(redirect);
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                        Toast.makeText(Login.this, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
+        TextView lblUsernameError = (TextView) findViewById(R.id.lblUsernameError);
+        TextView lblPasswordError = (TextView) findViewById(R.id.lblPasswordError);
+        //Setting empty string to the error labels.
+        lblUsernameError.setText("");
+        lblPasswordError.setText("");
+
+        //Checking the username is empty or not.
+        if(email.isEmpty())
+        {
+            lblUsernameError.setText("Please enter the email.");
+        }
+        //Checking the password is empty or not.
+        else if(password.isEmpty())
+        {
+            lblPasswordError.setText("Please enter password");
+        }
+        //Validating the username and password.
+        else
+        {
+            mAuth.signInWithEmailAndPassword(email,password)
+                    .addOnCompleteListener(this, task -> {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent redirect = new Intent(Login.this,Home.class);
+                            startActivity(redirect);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            lblPasswordError.setText("Invalid Username/Password.");
+                        }
+                    });
+        }
     }
 
     public void register(View view) {
