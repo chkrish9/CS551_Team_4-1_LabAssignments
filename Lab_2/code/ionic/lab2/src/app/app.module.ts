@@ -9,6 +9,7 @@ import { AngularFireModule } from 'angularfire2';
 import { Camera } from '@ionic-native/camera';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner'; 
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -64,6 +65,7 @@ var config = {
     Camera,
     SplashScreen,
     BarcodeScanner,
+    YoutubeVideoPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

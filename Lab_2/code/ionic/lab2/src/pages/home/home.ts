@@ -74,6 +74,7 @@ export class HomePage {
       }
     let url = "https://westus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceAttributes=age,gender";
     this.http.post(url, obj, { headers: headers }).subscribe(data => {
+      console.log(JSON.stringify(data));
       this.gender = "Gender : "+data[0]["faceAttributes"]["gender"];
       this.age =  "Age : "+data[0]["faceAttributes"]["age"];
     });;

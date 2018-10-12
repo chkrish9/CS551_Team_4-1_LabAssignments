@@ -15,7 +15,7 @@
 
   <ion-card *ngFor="let result of results">
     <ion-card-content>
-      <img src="{{result.snippet.thumbnails.medium.url}}" height="{{result.snippet.thumbnails.medium.height}}" width="{{result.snippet.thumbnails.medium.width}}" />
+      <img src="{{result.snippet.thumbnails.medium.url}}" (click)="playVideo(result.id.videoId)" height="{{result.snippet.thumbnails.medium.height}}" width="{{result.snippet.thumbnails.medium.width}}" />
       <div class="padding-top-5px">
         <h2><strong>Title :</strong> {{result.snippet.title}}</h2>
         <p><strong>Channel :</strong> {{result.snippet.channelTitle}}</p>

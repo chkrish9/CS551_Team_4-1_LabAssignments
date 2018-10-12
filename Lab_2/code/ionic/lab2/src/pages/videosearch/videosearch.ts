@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { HttpClient,HttpParams } from '@angular/common/http';
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 @IonicPage()
 @Component({
@@ -12,6 +13,7 @@ export class VideosearchPage {
   results:any;
 
   constructor(public navCtrl: NavController,
+    private youtube: YoutubeVideoPlayer,
     public http: HttpClient) {
   }
 
@@ -30,6 +32,10 @@ export class VideosearchPage {
     return this.http.get("https://www.googleapis.com/youtube/v3/search", {params: params}).subscribe(
       (response) => this.results=response["items"]), 
       (error) =>console.log(JSON.stringify(error));
+  }
+
+  playVideo(vidId){
+    this.youtube.openVideo(vidId);
   }
 
 }
