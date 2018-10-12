@@ -7,6 +7,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireModule } from 'angularfire2';
 import { Camera } from '@ionic-native/camera';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner'; 
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -37,6 +39,7 @@ var config = {
     HttpClientModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    NgxQRCodeModule,
     IonicModule.forRoot(MyApp),
     AngularFireAuthModule,
     AngularFireModule.initializeApp(config)
@@ -52,6 +55,7 @@ var config = {
     StatusBar,
     Camera,
     SplashScreen,
+    BarcodeScanner,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
