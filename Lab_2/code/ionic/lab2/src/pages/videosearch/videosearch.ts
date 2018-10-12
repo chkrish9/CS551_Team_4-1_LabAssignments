@@ -22,6 +22,7 @@ export class VideosearchPage {
 
   search() {
     let params = new HttpParams();
+    //Specifying Http parameters
     params =params.append('maxResults',"25");
     params =params.append('part', "snippet");
     params =params.append('q', this.searchTerm);
