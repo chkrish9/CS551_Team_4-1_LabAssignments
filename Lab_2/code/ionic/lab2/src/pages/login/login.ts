@@ -51,7 +51,7 @@ export class LoginPage {
    }
  
    /*
-     This method will call when the user clicks on register.
+     This method will call when the user clicks on register
      In this we are validating the user details then we are register the user in the firebase.
    */
    register() {
