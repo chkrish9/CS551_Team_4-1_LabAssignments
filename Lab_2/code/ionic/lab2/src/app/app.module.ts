@@ -17,6 +17,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { QrcodePage } from '../pages/qrcode/qrcode';
+import { VideosearchPage } from '../pages/videosearch/videosearch';
+import { LogoutPageModule } from '../pages/logout/logout.module';
+import { PopoverComponent } from '../components/popover/popover';
 
 var config = {
   apiKey: "AIzaSyChOwtrVGatfmSocRXLl6uutvAWthStZAU",
@@ -32,13 +35,16 @@ var config = {
     MyApp,
     HomePage,
     LoginPage,
-    QrcodePage
+    QrcodePage,
+    VideosearchPage,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
+    LogoutPageModule,
     NgxQRCodeModule,
     IonicModule.forRoot(MyApp),
     AngularFireAuthModule,
@@ -49,7 +55,9 @@ var config = {
     MyApp,
     HomePage,
     LoginPage,
-    QrcodePage
+    QrcodePage,
+    VideosearchPage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,

@@ -13,7 +13,9 @@ export class QrcodePage {
   generatedCode=null;
   scannedCode=null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private barcodeScanner:BarcodeScanner) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    private barcodeScanner:BarcodeScanner) {
   }
 
   ionViewDidLoad() {

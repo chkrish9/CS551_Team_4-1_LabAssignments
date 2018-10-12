@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Video search</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="video-content">
+  <ion-item>
+    <ion-input type="text" placeholder="Enter Search term" [(ngModel)]="searchTerm"></ion-input>
+  </ion-item>
+  <button ion-button full icon-left (click)="search()">Search</button>
+
+  <ion-card *ngFor="let result of results">
+    <ion-card-content>
+      <img src="{{result.snippet.thumbnails.medium.url}}" height="{{result.snippet.thumbnails.medium.height}}" width="{{result.snippet.thumbnails.medium.width}}" />
+      <div class="padding-top-5px">
+        <h2><strong>Title :</strong> {{result.snippet.title}}</h2>
+        <p><strong>Channel :</strong> {{result.snippet.channelTitle}}</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

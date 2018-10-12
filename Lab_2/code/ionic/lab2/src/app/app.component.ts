@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { QrcodePage } from '../pages/qrcode/qrcode';
+import { VideosearchPage } from '../pages/videosearch/videosearch';
 import { LoginPage } from '../pages/login/login';
 
 @Component({
@@ -23,7 +24,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'QR Code', component: QrcodePage }
+      { title: 'QR Code', component: QrcodePage },
+      { title: 'Video Search', component:VideosearchPage }
     ];
 
   }
