@@ -8,11 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button full (click)="logout()">Logout</button>
+  <button ion-button full (click)="takePhoto()">Take photo</button>
+  <img  [src]="base64Image!== '' ? base64Image : defaultImg" class="thumbnails" />
+  <div class="text-center">
+    <label>{{gender}}</label><br />
+    <label>{{age}}</label>
+  </div>
 </ion-content>
