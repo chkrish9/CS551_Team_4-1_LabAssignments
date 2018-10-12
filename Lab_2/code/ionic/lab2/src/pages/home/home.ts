@@ -19,6 +19,7 @@ export class HomePage {
   age:string;
   defaultImg:string="assets/imgs/default-img.png";
 
+  //Constructor for
   constructor(public navCtrl: NavController,
     private afStorage: AngularFireStorage,
     public http:HttpClient,
