@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { HttpClient,HttpParams } from '@angular/common/http';
 
 @IonicPage()
@@ -12,8 +12,7 @@ export class VideosearchPage {
   results:any;
 
   constructor(public navCtrl: NavController,
-    public http: HttpClient,
-    public navParams: NavParams) {
+    public http: HttpClient) {
   }
 
   ionViewDidLoad() {
