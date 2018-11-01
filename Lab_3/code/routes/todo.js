@@ -33,6 +33,7 @@ router.put('/update/:id', (req, res) => {
 });
 });
 
+//Delete method.
 router.delete('/delete/:id', (req, res) => {
   const io = req.app.get('io');
   console.log(req.params.id);
@@ -41,7 +42,7 @@ router.delete('/delete/:id', (req, res) => {
         res.json({ msg: 'Failed while deleting todo', status: 'error',success:false });
     } else {
       io.emit('newTaskAdded');
-      res.json({ msg: 'todo deleted successfully' });
+      res.json({ msg: 'Todo deleted successfully' });
     }
 });
 });
