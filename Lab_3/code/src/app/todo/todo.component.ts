@@ -28,6 +28,7 @@ export class TodoComponent implements OnInit {
       .subscribe();
   }
 
+  //get todos
   getToDos() {
     this.http.get('/todo')
       .subscribe((toDos) => {
