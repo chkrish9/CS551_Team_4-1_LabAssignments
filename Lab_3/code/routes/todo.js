@@ -32,6 +32,7 @@ router.put('/update/:id', (req, res) => {
     if (err) {
        res.json({ msg: 'Failed while updating todo', status: 'error' });
    } else {
+	//Informing to client
     io.emit('newTaskAdded');
        res.json({ msg: 'Todo updated successfully' });
    }
