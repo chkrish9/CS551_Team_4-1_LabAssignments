@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
   const toDo = new ToDo({
     description: req.body.description
   });
+  	//Informing to client
   toDo.save().then(()=> {
     io.emit('newTaskAdded');
   });
