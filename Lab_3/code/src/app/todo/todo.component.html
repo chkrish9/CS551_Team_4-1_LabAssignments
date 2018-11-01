@@ -1,0 +1,28 @@
+<div class="container mt-3">
+  <h3>MEAN Todo</h3>
+  <div class="row">
+    <input type="text" name="" id="" 
+    class="form-control col col-sm-8" #todo>
+
+    <input type="button" value="Add"
+    class="btn btn-primary col col-sm-3 offset-1"
+    (click)="addToDo(todo.value)">
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-3" *ngFor="let todo of toDoList; let idx = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Task {{ idx + 1}}</h5>
+          <p class="card-text" *ngIf="isUpdate">{{todo.description}}</p>
+          <p class="card-text"><input type="text" [(ngModel)]="todo.description" *ngIf="!isUpdate"></p>
+          <a href="#" class="btn btn-primary" (click)="update(todo)"  *ngIf="isUpdate">Update</a>
+          <a href="#" class="btn btn-primary" (click)="updateTodo(todo)"  *ngIf="!isUpdate">Save</a>
+          <a href="#" class="btn btn-primary" (click)="deleteTodo(todo)">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
