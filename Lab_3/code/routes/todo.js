@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
   });
 });
 
+//Update todo
 router.put('/update/:id', (req, res) => {
   const io = req.app.get('io');
   console.log(req.body);
