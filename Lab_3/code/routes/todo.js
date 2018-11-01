@@ -25,6 +25,7 @@ router.get('/', (req, res) => {
 
 //Update todo
 router.put('/update/:id', (req, res) => {
+  //getting Socket io connections
   const io = req.app.get('io');
   console.log(req.body);
   ToDo.findByIdAndUpdate(req.params.id,{ $set: { description : req.body.description } },(err, todo) => {
