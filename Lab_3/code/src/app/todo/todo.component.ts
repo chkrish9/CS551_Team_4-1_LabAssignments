@@ -38,6 +38,8 @@ export class TodoComponent implements OnInit {
   update(todo){
     this.isUpdate = false;
   }
+
+  //Updated the todo
   updateTodo(todo){
     let url = '/todo/update/'+todo["_id"];
     this.http.put(url,todo)
