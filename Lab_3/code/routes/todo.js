@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ToDo = require('./../models/todo');
 
+//Create todo
 router.post('/', (req, res) => {
   const io = req.app.get('io');
   const toDo = new ToDo({
