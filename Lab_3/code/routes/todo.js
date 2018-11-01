@@ -13,6 +13,7 @@ router.post('/', (req, res) => {
   });
 });
 
+//Get method
 router.get('/', (req, res) => {
   ToDo.find({}).then((todos) => {
     res.send(todos);
@@ -27,7 +28,7 @@ router.put('/update/:id', (req, res) => {
        res.json({ msg: 'Failed while updating todo', status: 'error' });
    } else {
     io.emit('newTaskAdded');
-       res.json({ msg: 'new todo updated successfully' });
+       res.json({ msg: 'Todo updated successfully' });
    }
 });
 });
