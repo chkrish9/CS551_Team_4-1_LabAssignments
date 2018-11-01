@@ -5,6 +5,7 @@ const ToDo = require('./../models/todo');
 
 //Create todo
 router.post('/', (req, res) => {
+  //getting Socket io connections
   const io = req.app.get('io');
   const toDo = new ToDo({
     description: req.body.description
