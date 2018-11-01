@@ -15,6 +15,7 @@ router.post('/', (req, res) => {
 
 //Get method
 router.get('/', (req, res) => {
+  //Get todos
   ToDo.find({}).then((todos) => {
     res.send(todos);
   });
