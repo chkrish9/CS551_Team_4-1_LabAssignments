@@ -38,6 +38,7 @@ router.delete('/delete/:id', (req, res) => {
   //getting Socket io connections
   const io = req.app.get('io');
   console.log(req.params.id);
+  //Removing todo
   ToDo.remove({ _id: req.params.id },(err, result) => {
     if (err) {
         res.json({ msg: 'Failed while deleting todo', status: 'error',success:false });
