@@ -45,6 +45,7 @@ export class TodoComponent implements OnInit {
     this.isUpdate = true;
   }
 
+  //Remove the todo
   deleteTodo(todo){
     let url = '/todo/delete/'+todo["_id"];
     this.http.delete(url)
